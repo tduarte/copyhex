@@ -1,0 +1,19 @@
+.ch-copied {
+    color: white;
+    box-sizing: border-box;
+    font-family: "Flama";
+    font-weight: 500;
+    text-align: center;
+    padding-top: 70px;
+    width: 100%;
+    height: 150px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba(255, 255, 255, 0.2);
+    opacity: 0;
+    -webkit-animation-duration: 0.3s;
+    animation-duration: 0.3s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both
+}
