@@ -5,18 +5,25 @@
 ============================================*/
 
 
-$.fn.copyhex = function() {
+$.fn.copyhex = function(options) {
+
+	// This is the easiest way to have default options.
+	var settings = $.extend({
+		backgroundColor: true
+	}, options );
+
+	if (settings.backgroundColor === true) {
+		$(this).css('background-color', function () { 
+			return $(this).data('color')
+		});
+	}
 
 	$(this).css('cursor', 'pointer'); 
-	$(this).css('background-color', function () { 
-		return $(this).data('color')
-	});
-
 	this.on("click", function() {
 		event.preventDefault();
 		var box = $(this),
 			color = $(box).data("color");
-			boxContent = $('<div class="ch-copied">Copiado!</div>');
+			boxContent = $('<div class="ch-temp"><input size="1" id="colorInput"><div class="ch-copied">Copiado!</div></div>');
 		$(box).append(boxContent);
 		if (boxContent.hasClass('fadeOut')) {
 			boxContent.removeClass('fadeOut');
@@ -28,10 +35,8 @@ $.fn.copyhex = function() {
 	      box.removeClass('pulse');
 	  	}, 300);
 	  	setTimeout(function(){
-	  		box.empty();
+	  		$('.ch-temp').remove();
 	  	}, 1000);
-		// var colorSpan = $(this).parents('span');
-		console.log(color);
 	    copyToClipboard(color);
     });
 	function copyToClipboard(elem) {
@@ -46,7 +51,7 @@ $.fn.copyhex = function() {
 		// copy the selection
 		try {
 			succeed = document.execCommand("copy");
-			// console.log('Copiado!')
+
 		} catch(e) {
 			succeed = false;
 		}
